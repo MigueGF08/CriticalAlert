@@ -1,0 +1,29 @@
+variable "project_name" {
+  type        = string
+  default     = "CritAlert"
+  description = "Name of the project (used in resource naming)"
+}
+
+variable "region" {
+  type        = string
+  default     = "us-east-1"
+  description = "AWS region where resources will be deployed"
+}
+
+variable "email_subscription" {
+  type        = string
+  default     = "your-email@example.com"
+  description = "Email address to receive SNS alerts (requires confirmation after apply)"
+}
+
+variable "sms_subscription_1" {
+  type        = string
+  default     = "+1234567890"
+  description = "Primary physician phone number (SMS format: +<country code><number>)"
+}
+
+variable "sms_subscription_2" {
+  type        = string
+  default     = "+0987654321"
+  description = "Backup physician phone number (SMS format: +<country code><number>)"
+}
