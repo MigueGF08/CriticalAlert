@@ -55,21 +55,53 @@ En laboratorios clínicos y hospitales, los resultados críticos (ej: potasio mu
 ## Estructura del repositorio
 
 ```
-ProyectoCritico/
-├── lambda/
-│   └── lambda_function.py          # Función Lambda en Python (evaluación de resultados)
-├── terraform/
-│   ├── main.tf                     # Recursos principales (Lambda, DynamoDB, API, Step Functions, SNS, S3)
-│   ├── providers.tf                # Configuración de providers (AWS)
-│   ├── variables.tf                # Variables (project_name, region, emails, SMSs)
-│   └── outputs.tf                  # Outputs (api_endpoint, sfn_arn, etc.)
-├── web/
-│   ├── index.html                  # Formulario web para generar eventos de prueba
-│   └── config.json                 # Configuración del frontend (URL del API)
-├── deploy.ps1                      # Script PowerShell para empaquetar Lambda y ejecutar Terraform
-├── README.md                       # Este archivo
-└── ARCHITECTURE.md                 # Documento detallado de arquitectura
+CriticalAlert/
+├── .github/                    # Configuración de GitHub Actions para CI/CD
+│   └── workflows/
+│       └── terraform.yml       # Pipeline de despliegue automatizado
+│
+├── ProyectoCritico/            # Código fuente principal
+│   ├── .github/                # Configuración específica del proyecto
+│   │   └── workflows/
+│   │       └── terraform.yml   # Workflows de CI/CD
+│   │
+│   ├── lambda/                 # Código de las funciones Lambda
+│   │   └── lambda_function.py  # Lógica principal de procesamiento
+│   │
+│   ├── terraform/              # Infraestructura como código
+│   │   ├── api_gateway.tf      # Configuración de API Gateway
+│   │   ├── dynamodb.tf         # Configuración de DynamoDB
+│   │   ├── iam.tf              # Roles y permisos IAM
+│   │   ├── lambda.tf           # Configuración de Lambda
+│   │   ├── main.tf             # Configuración principal
+│   │   ├── outputs.tf          # Salidas de Terraform
+│   │   ├── providers.tf        # Proveedores de Terraform
+│   │   ├── s3.tf               # Configuración de S3
+│   │   ├── sns.tf              # Configuración de SNS
+│   │   ├── step_functions.tf   # Configuración de Step Functions
+│   │   ├── variables.tf        # Variables de Terraform
+│   │   └── variables.tf.example # Ejemplo de variables
+│   │
+│   ├── web/                    # Frontend estático
+│   │   ├── config.json         # Configuración del frontend
+│   │   └── index.html          # Interfaz de usuario web
+│   │
+│   ├── .gitignore             # Archivos ignorados por Git
+│   ├── ARCHITECTURE.md        # Documentación de la arquitectura
+│   ├── README.md              # Este archivo
+│   └── deploy.ps1             # Script de despliegue para Windows
+└── .git/                      # Directorio de Git (oculto)
 ```
+
+### Descripción de Directorios Principales
+
+- **.github/**: Contiene la configuración de GitHub Actions para la integración y despliegue continuo.
+- **ProyectoCritico/**: Directorio raíz del proyecto.
+  - **lambda/**: Contiene el código fuente de las funciones Lambda que procesan los resultados de laboratorio.
+  - **terraform/**: Incluye toda la configuración de infraestructura como código usando Terraform.
+  - **web/**: Contiene los archivos estáticos del frontend para probar el sistema.
+  - **ARCHITECTURE.md**: Documentación detallada de la arquitectura del sistema.
+  - **deploy.ps1**: Script de PowerShell para facilitar el despliegue en entornos Windows.
 
 ## Requisitos
 
